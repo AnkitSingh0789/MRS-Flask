@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Recommended Movies</title>
+    <style>
+        body {
+            background: url('https://repository-images.githubusercontent.com/275336521/20d38e00-6634-11eb-9d1f-6a5232d0f84f') no-repeat center center fixed;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            color: white;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .overlay {
+            background: rgba(0, 0, 0, 0.8);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        .container {
+            position: relative;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            width: 70%;
+            margin: 50px auto;
+            overflow: auto;
+        }
+        
+        h1,
+        h2 {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .movie {
+            background: rgba(255, 255, 255, 0.1);
+            margin: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .movie img {
+            width: 150px;
+            border-radius: 5px;
+        }
+        
+        .movie-details {
+            margin-left: 20px;
+            text-align: left;
+        }
+        
+        .movie-details h3 {
+            margin: 0;
+        }
+        
+        .movie-details p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="overlay"></div>
+    <div class="container">
+        <h1>Movie Recommendation System</h1>
+        <h2>Recommended Movies</h2>
+        {% for title, poster, overview, release_date, rating in recommended_movies %}
+        <div class="movie">
+            <img src="{{ poster }}" alt="{{ title }} poster">
+            <div class="movie-details">
+                <h3>{{ title }}</h3>
+                <p><strong>Release Date:</strong> {{ release_date }}</p>
+                <p><strong>Rating:</strong> {{ rating }}</p>
+                <p><strong>Overview:</strong> {{ overview }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+
+</html>
