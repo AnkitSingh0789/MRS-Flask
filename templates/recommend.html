@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recommended Movies</title>
     <style>
         body {
@@ -10,8 +11,8 @@
             background-size: cover;
             font-family: Arial, sans-serif;
             color: white;
-            padding: 0;
             margin: 0;
+            padding: 0;
         }
         
         .overlay {
@@ -29,42 +30,106 @@
             background: rgba(0, 0, 0, 0.7);
             padding: 20px;
             border-radius: 10px;
-            width: 70%;
+            width: 100%;
+            max-width: 1400px;
+            /* Max width for large screens */
             margin: 50px auto;
-            overflow: auto;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         }
         
         h1,
         h2 {
             text-align: center;
             margin: 20px 0;
+            font-size: 2.5em;
+            /* Increased font size */
         }
         
         .movie {
             background: rgba(255, 255, 255, 0.1);
-            margin: 20px;
+            margin: 20px auto;
             padding: 20px;
             border-radius: 10px;
             display: flex;
+            flex-direction: column;
             align-items: center;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+            max-width: 100%;
+            /* Allow full width */
+            text-align: center;
+        }
+        
+        .movie a {
+            text-decoration: none;
+            color: inherit;
         }
         
         .movie img {
-            width: 150px;
+            width: 250px;
+            /* Increase the image size */
+            height: auto;
             border-radius: 5px;
+            transition: transform 0.4s ease-in-out;
+        }
+        
+        .movie img:hover {
+            transform: scale(1.1);
+            /* Zoom effect */
         }
         
         .movie-details {
-            margin-left: 20px;
-            text-align: left;
+            margin-top: 15px;
+            /* Increased spacing */
+            width: 100%;
+            /* Full width */
+            text-align: center;
         }
         
         .movie-details h3 {
-            margin: 0;
+            margin: 10px 0;
+            font-size: 1.8em;
+            /* Increased font size */
         }
         
         .movie-details p {
             margin: 5px 0;
+            font-size: 1.2em;
+            /* Larger font size */
+        }
+        
+        .movie-details a {
+            color: #ff6f61;
+            text-decoration: none;
+        }
+        
+        .movie-details a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .movie img {
+                width: 200px;
+                /* Adjust size for smaller screens */
+            }
+            .movie-details h3 {
+                font-size: 1.5em;
+            }
+            .movie-details p {
+                font-size: 1em;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .movie img {
+                width: 150px;
+                /* Adjust size for very small screens */
+            }
+            .movie-details h3 {
+                font-size: 1.2em;
+            }
+            .movie-details p {
+                font-size: 0.9em;
+            }
         }
     </style>
 </head>
@@ -76,9 +141,11 @@
         <h2>Recommended Movies</h2>
         {% for title, poster, overview, release_date, rating in recommended_movies %}
         <div class="movie">
-            <img src="{{ poster }}" alt="{{ title }} poster">
+            <a href="https://www.google.com/search?q={{ title }}" target="_blank">
+                <img src="{{ poster }}" alt="{{ title }} poster">
+            </a>
             <div class="movie-details">
-                <h3>{{ title }}</h3>
+                <h3><a href="https://www.google.com/search?q={{ title }}" target="_blank">{{ title }}</a></h3>
                 <p><strong>Release Date:</strong> {{ release_date }}</p>
                 <p><strong>Rating:</strong> {{ rating }}</p>
                 <p><strong>Overview:</strong> {{ overview }}</p>
