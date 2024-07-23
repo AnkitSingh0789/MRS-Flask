@@ -1,4 +1,4 @@
-Flask
-pandas
-requests
-from flask import Flask
+Flask==2.2.2
+pandas==1.5.3
+numpy==1.24.1
+scikit-learn==1.3.0
