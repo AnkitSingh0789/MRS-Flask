@@ -1,7 +1,8 @@
-from flask import Flask, request, render_template, jsonify
+from flask import Flask, request, render_template
 import pickle
 import pandas as pd
 import requests
+import gzip
 import urllib.parse  # For encoding movie titles in URLs
 
 app = Flask(__name__)
@@ -40,9 +41,12 @@ def recommend(movie, min_rating=5.0):
     return recommended_movie_details
 
 # Load movies and similarity matrix
-movies_list = pickle.load(open('movies.pkl', 'rb'))
+with open('movies.pkl', 'rb') as f:
+    movies_list = pickle.load(f)
 movies = pd.DataFrame(movies_list)
-similarity = pickle.load(open('similarity.pkl', 'rb'))
+
+with gzip.open('similarity.pkl.gz', 'rb') as f:
+    similarity = pickle.load(f)
 
 @app.route('/')
 def index():

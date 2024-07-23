@@ -7,67 +7,84 @@
     <title>Movie Recommendation System</title>
     <style>
         body {
-            background-image: linear-gradient(to bottom right, rgba(34, 193, 195, 0.6), rgba(253, 187, 45, 0.6)), url("https://repository-images.githubusercontent.com/275336521/20d38e00-6634-11eb-9d1f-6a5232d0f84f");
+            background: linear-gradient(to bottom right, rgba(34, 193, 195, 0.7), rgba(253, 187, 45, 0.7)), url("https://repository-images.githubusercontent.com/275336521/20d38e00-6634-11eb-9d1f-6a5232d0f84f");
             background-size: cover;
             background-attachment: fixed;
+            font-family: 'Arial', sans-serif;
             color: #f0f0f0;
-            font-family: 'Roboto', sans-serif;
             margin: 0;
-            padding: 0;
-            box-sizing: border-box;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
             height: 100vh;
+            padding: 2em;
+        }
+        
+        .container {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 2em;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
         }
         
         h1 {
-            color: #f5f5f5;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-            margin-bottom: 0.5em;
+            margin-bottom: 1em;
+            font-size: 2.5em;
+            color: #fff;
         }
         
-        .form-container {
-            background-color: rgba(0, 0, 0, 0.6);
-            padding: 2em;
-            border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         
-        .form-container label {
-            display: block;
-            margin-bottom: 0.5em;
-            color: #ffdb58;
-        }
-        
-        .form-container select,
-        .form-container input[type="submit"] {
+        select,
+        input[type="range"],
+        input[type="submit"] {
             width: 100%;
-            padding: 0.5em;
+            padding: 10px;
             border-radius: 8px;
             border: none;
-            margin-bottom: 1em;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: box-shadow 0.2s ease;
+            margin: 0.5em 0;
+            font-size: 1em;
         }
         
-        .form-container select:focus,
-        .form-container input[type="submit"]:hover {
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        select {
+            background-color: #333;
+            color: #fff;
         }
         
-        .form-container input[type="submit"] {
+        input[type="range"] {
+            background: #444;
+            -webkit-appearance: none;
+            height: 8px;
+            border-radius: 5px;
+        }
+        
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            background: #22c1c3;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+        }
+        
+        input[type="submit"] {
             background-color: #22c1c3;
-            color: white;
-            font-size: 16px;
+            color: #fff;
             cursor: pointer;
-            transition: transform 0.2s ease;
+            font-size: 1.2em;
+            border: none;
+            transition: background-color 0.3s, transform 0.3s;
         }
         
-        .form-container input[type="submit"]:hover {
-            transform: translateY(-2px);
+        input[type="submit"]:hover {
             background-color: #1aa0a2;
+            transform: translateY(-2px);
         }
         
         footer {
@@ -75,7 +92,7 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: rgba(0, 0, 0, 0.8);
             color: #f0f0f0;
             text-align: center;
             padding: 1em 0;
@@ -84,10 +101,10 @@
 </head>
 
 <body>
-    <div class="form-container">
-        <h1>🎬 Movie Recommendation System</h1>
+    <div class="container">
+        <h1>Movie Recommendation System</h1>
         <form action="/recommend" method="POST">
-            <label for="movie">Choose a movie:</label>
+            <label for="movie">Select a Movie:</label>
             <select name="movie" id="movie" required>
                 {% for movie in movie_list %}
                     <option value="{{ movie }}">{{ movie }}</option>
@@ -98,7 +115,7 @@
             <input type="range" id="min_rating" name="min_rating" min="0" max="10" step="0.1" value="5.0" oninput="this.nextElementSibling.value = this.value">
             <output>5.0</output>
 
-            <input type="submit" value="Recommend">
+            <input type="submit" value="Get Recommendations">
         </form>
     </div>
 
