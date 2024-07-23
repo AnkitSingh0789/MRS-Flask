@@ -7,152 +7,144 @@
     <title>Recommended Movies</title>
     <style>
         body {
-            background: url('https://repository-images.githubusercontent.com/275336521/20d38e00-6634-11eb-9d1f-6a5232d0f84f') no-repeat center center fixed;
+            background-image: linear-gradient(to bottom right, rgba(34, 193, 195, 0.6), rgba(253, 187, 45, 0.6)), url("https://repository-images.githubusercontent.com/275336521/20d38e00-6634-11eb-9d1f-6a5232d0f84f");
             background-size: cover;
-            font-family: Arial, sans-serif;
-            color: white;
+            background-attachment: fixed;
+            color: #f0f0f0;
+            font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
-        }
-        
-        .overlay {
-            background: rgba(0, 0, 0, 0.8);
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-        }
-        
-        .container {
-            position: relative;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 20px;
-            border-radius: 10px;
-            width: 100%;
-            max-width: 1400px;
-            /* Max width for large screens */
-            margin: 50px auto;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-        }
-        
-        h1,
-        h2 {
-            text-align: center;
-            margin: 20px 0;
-            font-size: 2.5em;
-            /* Increased font size */
-        }
-        
-        .movie {
-            background: rgba(255, 255, 255, 0.1);
-            margin: 20px auto;
-            padding: 20px;
-            border-radius: 10px;
+            box-sizing: border-box;
             display: flex;
             flex-direction: column;
             align-items: center;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-            max-width: 100%;
-            /* Allow full width */
-            text-align: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            padding-top: 2em;
         }
         
-        .movie a {
-            text-decoration: none;
-            color: inherit;
+        h1 {
+            color: #f5f5f5;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            margin-bottom: 1em;
         }
         
-        .movie img {
-            width: 250px;
-            /* Increase the image size */
-            height: auto;
-            border-radius: 5px;
-            transition: transform 0.4s ease-in-out;
+        .recommendation-container {
+            max-width: 800px;
+            margin: 2em 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 1em;
+            width: 90%;
         }
         
-        .movie img:hover {
-            transform: scale(1.1);
-            /* Zoom effect */
+        .recommendation-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 12px;
+            padding: 1em;
+            margin-bottom: 1em;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            width: 100%;
+            max-width: 400px;
+            margin: 1em auto;
+        }
+        
+        .recommendation-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        .movie-poster {
+            border-radius: 8px;
+            width: 100%;
+            max-width: 250px;
+            transition: transform 0.2s ease;
+            margin-bottom: 15px;
+            cursor: pointer;
+        }
+        
+        .movie-poster:hover {
+            transform: scale(1.05);
         }
         
         .movie-details {
-            margin-top: 15px;
-            /* Increased spacing */
-            width: 100%;
-            /* Full width */
             text-align: center;
+            padding: 0 20px;
+            max-width: 100%;
         }
         
-        .movie-details h3 {
-            margin: 10px 0;
-            font-size: 1.8em;
-            /* Increased font size */
+        .movie-title {
+            font-size: 1.5em;
+            color: #333;
+            margin-bottom: 0.5em;
         }
         
-        .movie-details p {
-            margin: 5px 0;
-            font-size: 1.2em;
-            /* Larger font size */
+        .movie-overview {
+            font-size: 1em;
+            color: #555;
+            margin-bottom: 1em;
         }
         
-        .movie-details a {
-            color: #ff6f61;
-            text-decoration: none;
+        .movie-info {
+            font-size: 0.9em;
+            color: #777;
+            margin-top: 0.5em;
         }
         
-        .movie-details a:hover {
-            text-decoration: underline;
-        }
-        
-        @media (max-width: 768px) {
-            .movie img {
-                width: 200px;
-                /* Adjust size for smaller screens */
+        @media (min-width: 768px) {
+            .recommendation-container {
+                grid-template-columns: 1fr 1fr;
+                gap: 20px;
             }
-            .movie-details h3 {
-                font-size: 1.5em;
+            .recommendation-section {
+                flex-direction: row;
+                align-items: flex-start;
+                max-width: none;
             }
-            .movie-details p {
-                font-size: 1em;
+            .movie-details {
+                text-align: left;
             }
         }
         
-        @media (max-width: 480px) {
-            .movie img {
-                width: 150px;
-                /* Adjust size for very small screens */
-            }
-            .movie-details h3 {
-                font-size: 1.2em;
-            }
-            .movie-details p {
-                font-size: 0.9em;
-            }
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #f0f0f0;
+            text-align: center;
+            padding: 1em 0;
         }
     </style>
 </head>
 
 <body>
-    <div class="overlay"></div>
-    <div class="container">
-        <h1>Movie Recommendation System</h1>
-        <h2>Recommended Movies</h2>
+    <h1>Recommended Movies:</h1>
+    <div class="recommendation-container">
         {% for title, poster, overview, release_date, rating in recommended_movies %}
-        <div class="movie">
-            <a href="https://www.google.com/search?q={{ title }}" target="_blank">
-                <img src="{{ poster }}" alt="{{ title }} poster">
+        <div class="recommendation-section">
+            <a href="https://www.google.com/search?q={{ title | urlencode }}" target="_blank">
+                <img src="{{ poster }}" alt="{{ title }}" class="movie-poster" />
             </a>
             <div class="movie-details">
-                <h3><a href="https://www.google.com/search?q={{ title }}" target="_blank">{{ title }}</a></h3>
-                <p><strong>Release Date:</strong> {{ release_date }}</p>
-                <p><strong>Rating:</strong> {{ rating }}</p>
-                <p><strong>Overview:</strong> {{ overview }}</p>
+                <h3 class="movie-title">{{ title }}</h3>
+                <p class="movie-overview">{{ overview }}</p>
+                <p class="movie-info"><strong>Release Date:</strong> {{ release_date }}</p>
+                <p class="movie-info"><strong>Rating:</strong> {{ rating }}/10</p>
             </div>
         </div>
         {% endfor %}
     </div>
+
+    <footer>
+        <p>© 2024 Movie Recommendation System | Created by Ankit Singh</p>
+    </footer>
 </body>
 
 </html>

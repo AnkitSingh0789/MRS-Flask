@@ -3,91 +3,108 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movie Recommendation System</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         body {
-            background: url('https://repository-images.githubusercontent.com/275336521/20d38e00-6634-11eb-9d1f-6a5232d0f84f') no-repeat center center fixed;
+            background-image: linear-gradient(to bottom right, rgba(34, 193, 195, 0.6), rgba(253, 187, 45, 0.6)), url("https://repository-images.githubusercontent.com/275336521/20d38e00-6634-11eb-9d1f-6a5232d0f84f");
             background-size: cover;
-            font-family: Arial, sans-serif;
-            color: white;
-            text-align: center;
-            padding: 0;
+            background-attachment: fixed;
+            color: #f0f0f0;
+            font-family: 'Roboto', sans-serif;
             margin: 0;
-        }
-        
-        .overlay {
-            background: rgba(0, 0, 0, 0.8);
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-        }
-        
-        .container {
-            position: relative;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 20px;
-            border-radius: 10px;
-            width: 50%;
-            margin: 100px auto;
+            padding: 0;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
         }
         
         h1 {
-            font-size: 2.5em;
-            margin-bottom: 20px;
+            color: #f5f5f5;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            margin-bottom: 0.5em;
         }
         
-        .form-group {
-            margin: 20px auto;
+        .form-container {
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 2em;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
         
-        .form-group select {
-            width: 80%;
-            padding: 10px;
-            border-radius: 5px;
+        .form-container label {
+            display: block;
+            margin-bottom: 0.5em;
+            color: #ffdb58;
+        }
+        
+        .form-container select,
+        .form-container input[type="submit"] {
+            width: 100%;
+            padding: 0.5em;
+            border-radius: 8px;
             border: none;
-            font-size: 1em;
-            outline: none;
-            background-color: #333;
-            color: white;
+            margin-bottom: 1em;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.2s ease;
         }
         
-        button {
-            width: 80%;
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 5px;
-            border: none;
-            font-size: 1em;
-            background-color: #ff6f61;
+        .form-container select:focus,
+        .form-container input[type="submit"]:hover {
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        .form-container input[type="submit"] {
+            background-color: #22c1c3;
             color: white;
+            font-size: 16px;
             cursor: pointer;
+            transition: transform 0.2s ease;
         }
         
-        button:hover {
-            background-color: #ff4f41;
+        .form-container input[type="submit"]:hover {
+            transform: translateY(-2px);
+            background-color: #1aa0a2;
+        }
+        
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #f0f0f0;
+            text-align: center;
+            padding: 1em 0;
         }
     </style>
 </head>
 
 <body>
-    <div class="overlay"></div>
-    <div class="container">
-        <h1>Movie Recommendation System</h1>
-        <form action="/recommend" method="post" target="_blank">
-            <div class="form-group">
-                <select name="movie">
-                    {% for movie in movie_list %}
-                        <option value="{{ movie }}">{{ movie }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-            <button type="submit">Recommend</button>
+    <div class="form-container">
+        <h1>🎬 Movie Recommendation System</h1>
+        <form action="/recommend" method="POST">
+            <label for="movie">Choose a movie:</label>
+            <select name="movie" id="movie" required>
+                {% for movie in movie_list %}
+                    <option value="{{ movie }}">{{ movie }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="min_rating">Minimum Rating:</label>
+            <input type="range" id="min_rating" name="min_rating" min="0" max="10" step="0.1" value="5.0" oninput="this.nextElementSibling.value = this.value">
+            <output>5.0</output>
+
+            <input type="submit" value="Recommend">
         </form>
     </div>
+
+    <footer>
+        <p>© 2024 Movie Recommendation System | Created by Ankit Singh</p>
+    </footer>
 </body>
 
 </html>
